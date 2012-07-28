@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Registration of Device Struct</title><meta name="generator" content="DocBook XSL Stylesheets V1.75.1" /><link rel="home" href="index.html" title="Writing an ALSA Driver" /><link rel="up" href="ch04.html" title="Chapter 4. PCI Resource Management" /><link rel="prev" href="ch04s03.html" title="Resource Allocation" /><link rel="next" href="ch04s05.html" title="PCI Entries" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Registration of Device Struct</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch04s03.html">Prev</a> </td><th width="60%" align="center">Chapter 4. PCI Resource Management</th><td width="20%" align="right"> <a accesskey="n" href="ch04s05.html">Next</a></td></tr></table><hr /></div><div class="section" title="Registration of Device Struct"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="pci-resource-device-struct"></a>Registration of Device Struct</h2></div></div></div><p>
+	At some point, typically after calling <code class="function">snd_device_new()</code>,
+	you need to register the struct <span class="structname">device</span> of the chip
+	you're handling for udev and co.  ALSA provides a macro for compatibility with
+	older kernels.  Simply call like the following:
+        </p><div class="informalexample"><pre class="programlisting">
+
+  snd_card_set_dev(card, &amp;pci-&gt;dev);
+
+          </pre></div><p>
+	so that it stores the PCI's device pointer to the card.  This will be
+	referred by ALSA core functions later when the devices are registered.
+      </p><p>
+	In the case of non-PCI, pass the proper device struct pointer of the BUS
+	instead.  (In the case of legacy ISA without PnP, you don't have to do
+	anything.)
+      </p></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch04s03.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch04.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch04s05.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Resource Allocation </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> PCI Entries</td></tr></table></div></body></html>
